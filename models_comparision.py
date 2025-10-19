@@ -49,4 +49,23 @@ plt.legend()
 plt.savefig("graph_agile.png")
 plt.close()
 
+# ===== INCREMENTAL MODEL =====
+plt.figure(figsize=(7,5))
+
+increments = [(0,10), (10,20), (20,30)]  # each increment
+for i, (start, end) in enumerate(increments, start=1):
+    subset_days = np.arange(start, end+1, 1)
+    temps_inc = [quadratic_weather_model(d) for d in subset_days]
+    plt.plot(subset_days, temps_inc, marker='o', label=f"Increment {i}")
+
+plt.title("Incremental Model Weather Curve")
+plt.xlabel("Days")
+plt.ylabel("Temperature (°C)")
+plt.grid(True)
+plt.legend()
+plt.savefig("graph_incremental.png")
+plt.close()
+
+print("✅ Graph generated: graph_incremental.png")
+
 print("✅ Graphs generated: graph_quadratic.png, graph_iterative.png, graph_agile.png")
